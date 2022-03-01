@@ -17,7 +17,7 @@ import React, { useEffect, useReducer, useState } from 'react'
 import styles from './styles.module.css'
 
 export const Survezy = ({ path, link }) => {
-  const [questions, setQuestions] = useState(null)
+  const [survey, setSurvey] = useState(null)
 
   useEffect(() => {
     const surveyEndpoint = path
@@ -26,18 +26,18 @@ export const Survezy = ({ path, link }) => {
 
     axios
       .get(`https://karishma7.herokuapp.com/${surveyEndpoint}`)
-      .then((response) => setQuestions(response.data.questions))
+      .then((response) => setSurvey(response.data))
   }, [path, link])
 
-  if (questions === null) return null
+  if (survey === null) return null
 
   return (
     <Slide in direction='up' className={styles.survezy_box}>
       <Box>
         <Survey
-          path={path}
-          questions={questions}
-          onFinish={() => setQuestions(null)}
+          path={survey.path}
+          questions={survey.questions}
+          onFinish={() => setSurvey(null)}
         />
       </Box>
     </Slide>
