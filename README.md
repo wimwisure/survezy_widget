@@ -7,7 +7,7 @@
 ## Install
 
 ```bash
-npm install --save survezy_widget
+npm install survezy_widget
 ```
 
 ## Usage
