@@ -15,12 +15,12 @@ npm install --save survezy_widget
 ```jsx
 import React, { Component } from 'react'
 
-import MyComponent from 'survezy_widget'
+import { Survezy } from 'survezy_widget'
 import 'survezy_widget/dist/index.css'
 
 class Example extends Component {
   render() {
-    return <MyComponent />
+     <Survezy link={"container_link"} path={"survey_path"} />
   }
 }
 ```
