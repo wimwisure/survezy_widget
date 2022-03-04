@@ -1,18 +1,14 @@
-# survezy_widget
-
-> Made with create-react-library
+# Survezy Widget
 
 [![NPM](https://img.shields.io/npm/v/survezy_widget.svg)](https://www.npmjs.com/package/survezy_widget) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
-
-## Install
-
-```bash
-npm install survezy_widget
-```
 
 ## Usage
 
 ### React
+
+```bash
+> npm install survezy_widget
+```
 
 ```jsx
 import React, { Component } from 'react'
@@ -52,7 +48,3 @@ class Example extends Component {
 
 </html>
 ```
-
-## License
-
-MIT © [wimwisure](https://github.com/wimwisure)
