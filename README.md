@@ -12,6 +12,8 @@ npm install survezy_widget
 
 ## Usage
 
+### React
+
 ```jsx
 import React, { Component } from 'react'
 
@@ -20,9 +22,35 @@ import 'survezy_widget/dist/index.css'
 
 class Example extends Component {
   render() {
-     <Survezy link={"container_link"} path={"survey_path"} />
+     <Survezy link={"container_link"} />
   }
 }
+```
+
+### HTML
+
+```html
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Survezy JS</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <script defer="defer" src="https://karishma7.herokuapp.com/survezy/1.0.7/survezy.js"></script>
+</head>
+
+<body>
+  <div id="survezy"></div>
+
+  <button type="button"
+    onClick="(function(){survezy.init('c2F1cmF2QHdpbXdpc3VyZS5jb20gU3VyZXp5IGxhbmRpbmcgcGFnZQ==');})();">
+    Open Survey
+  </button>
+
+</body>
+
+</html>
 ```
 
 ## License
