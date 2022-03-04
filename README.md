@@ -44,7 +44,7 @@ class Example extends Component {
   <div id="survezy"></div>
 
   <button type="button"
-    onClick="(function(){survezy.init('c2F1cmF2QHdpbXdpc3VyZS5jb20gU3VyZXp5IGxhbmRpbmcgcGFnZQ==');})();">
+    onClick="(function(){survezy.init('container_link');})();">
     Open Survey
   </button>
 
