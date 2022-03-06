@@ -10,8 +10,11 @@ import {
   Rating,
   Slider,
   Typography,
-  Button
+  Button,
+  IconButton,
+  TextField
 } from '@mui/material'
+import { Icon } from '@iconify/react'
 import axios from 'axios'
 import React, { useEffect, useReducer, useState } from 'react'
 import styles from './styles.module.css'
@@ -51,7 +54,9 @@ const surveyReducer = (state, { type, payload }) => {
 
     const shouldMove =
       state.currentQuestionIndex !== state.questions.length - 1 &&
-      payload.questionType !== 'MULTIPLE_CHOICE'
+      !['MULTIPLE_CHOICE', 'SHORT_ANSWER', 'PARAGRAPH'].includes(
+        payload.questionType
+      )
 
     return {
       ...state,
@@ -93,12 +98,11 @@ const Survey = ({ path, questions, onFinish }) => {
       state.answers[i] ? state.answers[i].toString() : null
     )
 
-    dispatch({ type: 'submitted' })
-    // axios
-    //   .post(`https://karishma7.herokuapp.com/survey/response/${path}`, {
-    //     answers
-    //   })
-    //   .then(() => dispatch({ type: 'submitted' }))
+    axios
+      .post(`https://karishma7.herokuapp.com/survey/response/${path}`, {
+        answers
+      })
+      .then(() => dispatch({ type: 'submitted' }))
   }
 
   if (state.submitted) return <h1>Thanks</h1>
@@ -187,16 +191,48 @@ const MultipleChoiceOptions = ({ options, answer, setAnswer }) => {
   )
 }
 
-const EmojiRatingOptions = () => {
-  return <h1>Emoji</h1>
+const EmojiRatingOptions = ({ answer, setAnswer }) => {
+  return (
+    <div>
+      {[
+        'emojione:angry-face',
+        'emojione:frowning-face',
+        'emojione:neutral-face',
+        'emojione:slightly-smiling-face',
+        'emojione:grinning-face'
+      ].map((emoji, index) => (
+        <IconButton key={index} onClick={() => setAnswer(index.toString())}>
+          <Icon icon={emoji} width='48' height='48' />
+        </IconButton>
+      ))}
+    </div>
+  )
 }
 
-const ShortAnswerOptions = () => {
-  return <h1>Short answer</h1>
+const ShortAnswerOptions = ({ answer, setAnswer }) => {
+  return (
+    <TextField
+      fullWidth
+      label='Answer'
+      maxRows={1}
+      value={answer ?? ''}
+      onChange={(e) => setAnswer(e.target.value)}
+    />
+  )
 }
 
-const ParagraphOption = () => {
-  return <h1>Paragraph</h1>
+const ParagraphOption = ({ answer, setAnswer }) => {
+  return (
+    <TextField
+      fullWidth
+      multiline
+      label='Answer'
+      rows={3}
+      maxRows={3}
+      value={answer ?? ''}
+      onChange={(e) => setAnswer(e.target.value)}
+    />
+  )
 }
 
 const RatingOptions = ({ answer, setAnswer }) => (
@@ -244,9 +280,14 @@ const Options = ({ type, options, answer, setAnswer }) => {
       />
     )
 
-  if (type === 'EMOJI_RATING') return <EmojiRatingOptions />
-  if (type === 'SHORT_ANSWER') return <ShortAnswerOptions />
-  if (type === 'PARAGRAPH') return <ParagraphOption />
+  if (type === 'EMOJI_RATING')
+    return <EmojiRatingOptions answer={answer} setAnswer={setAnswer} />
+
+  if (type === 'SHORT_ANSWER')
+    return <ShortAnswerOptions answer={answer} setAnswer={setAnswer} />
+
+  if (type === 'PARAGRAPH')
+    return <ParagraphOption answer={answer} setAnswer={setAnswer} />
 
   return null
 }
