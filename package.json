@@ -21,25 +21,14 @@
     "test:unit": "cross-env CI=1 react-scripts test --env=jsdom",
     "test:watch": "react-scripts test --env=jsdom",
     "predeploy": "cd example && npm install && npm run build",
-    "deploy": "gh-pages -d example/build",
-    "pack": "webpack --mode production"
+    "deploy": "gh-pages -d example/build"
   },
   "peerDependencies": {
     "react": "^17.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.4",
-    "@babel/preset-env": "^7.16.11",
-    "@babel/preset-react": "^7.16.7",
-    "@svgr/webpack": "^6.2.1",
-    "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.3",
-    "babel-loader": "^8.2.3",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
     "cross-env": "^7.0.2",
-    "html-webpack-plugin": "^5.5.0",
-    "css-loader": "^6.6.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.7.0",
     "eslint-config-standard": "^14.1.0",
@@ -56,13 +45,7 @@
     "prettier": "^2.0.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-scripts": "^3.4.1",
-    "serve": "^13.0.2",
-    "style-loader": "^3.3.1",
-    "url-loader": "^4.1.1",
-    "webpack": "^5.69.0",
-    "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.7.4"
+    "react-scripts": "^3.4.1"
   },
   "files": [
     "dist"
