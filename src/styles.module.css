@@ -15,9 +15,6 @@
 }
 
 @media(min-width:601px) {
-	.survezy_main {
-		background: rgb(32, 32, 119);
-	}
 
 	.survezy_box {
 		width: 369px;

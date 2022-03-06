@@ -93,11 +93,12 @@ const Survey = ({ path, questions, onFinish }) => {
       state.answers[i] ? state.answers[i].toString() : null
     )
 
-    axios
-      .post(`https://karishma7.herokuapp.com/survey/response/${path}`, {
-        answers
-      })
-      .then(() => dispatch({ type: 'submitted' }))
+    dispatch({ type: 'submitted' })
+    // axios
+    //   .post(`https://karishma7.herokuapp.com/survey/response/${path}`, {
+    //     answers
+    //   })
+    //   .then(() => dispatch({ type: 'submitted' }))
   }
 
   if (state.submitted) return <h1>Thanks</h1>
@@ -186,6 +187,18 @@ const MultipleChoiceOptions = ({ options, answer, setAnswer }) => {
   )
 }
 
+const EmojiRatingOptions = () => {
+  return <h1>Emoji</h1>
+}
+
+const ShortAnswerOptions = () => {
+  return <h1>Short answer</h1>
+}
+
+const ParagraphOption = () => {
+  return <h1>Paragraph</h1>
+}
+
 const RatingOptions = ({ answer, setAnswer }) => (
   <Rating
     value={answer ? answer + 1 : 0}
@@ -230,6 +243,10 @@ const Options = ({ type, options, answer, setAnswer }) => {
         setAnswer={setAnswer}
       />
     )
+
+  if (type === 'EMOJI_RATING') return <EmojiRatingOptions />
+  if (type === 'SHORT_ANSWER') return <ShortAnswerOptions />
+  if (type === 'PARAGRAPH') return <ParagraphOption />
 
   return null
 }
