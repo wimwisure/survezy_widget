@@ -19,7 +19,7 @@ import axios from 'axios'
 import React, { useEffect, useReducer, useState } from 'react'
 import styles from './styles.module.css'
 
-export const Survezy = ({ path, link }) => {
+export const Survezy = ({ path, link, sx }) => {
   const [survey, setSurvey] = useState(null)
 
   useEffect(() => {
@@ -35,7 +35,7 @@ export const Survezy = ({ path, link }) => {
   if (survey === null) return null
 
   return (
-    <Slide in direction='up' className={styles.survezy_box}>
+    <Slide in direction='up' className={styles.survezy_box} sx={sx}>
       <Box>
         <Survey
           path={survey.path}
