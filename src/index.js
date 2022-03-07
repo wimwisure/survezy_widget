@@ -14,11 +14,7 @@ import {
   IconButton,
   TextField
 } from '@mui/material'
-import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied'
-import SentimentDissatisfiedIcon from '@mui/icons-material/SentimentDissatisfied'
-import SentimentNeutralIcon from '@mui/icons-material/SentimentNeutral'
-import SentimentSatisfiedIcon from '@mui/icons-material/SentimentSatisfied'
-import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied'
+import { Icon } from '@iconify/react'
 import axios from 'axios'
 import React, { useEffect, useReducer, useState } from 'react'
 import styles from './styles.module.css'
@@ -204,14 +200,14 @@ const EmojiRatingOptions = ({ answer, setAnswer }) => {
   return (
     <div>
       {[
-        SentimentVeryDissatisfiedIcon,
-        SentimentDissatisfiedIcon,
-        SentimentNeutralIcon,
-        SentimentSatisfiedIcon,
-        SentimentVerySatisfiedIcon
-      ].map((Emoji, index) => (
+        'emojione:angry-face',
+        'emojione:frowning-face',
+        'emojione:neutral-face',
+        'emojione:slightly-smiling-face',
+        'emojione:grinning-face'
+      ].map((emoji, index) => (
         <IconButton key={index} onClick={() => setAnswer(index.toString())}>
-          <Emoji sx={{ fontSize: 40 }} />
+          <Icon icon={emoji} width='48' height='48' />
         </IconButton>
       ))}
     </div>
