@@ -35,7 +35,12 @@ export const Survezy = ({ path, link, sx }) => {
   if (survey === null) return null
 
   return (
-    <Slide in direction='up' className={styles.survezy_box} sx={sx}>
+    <Slide
+      in
+      direction='up'
+      className={styles.survezy_box}
+      sx={{ position: 'fixed', ...sx }}
+    >
       <Box>
         <Survey
           path={survey.path}
