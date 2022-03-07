@@ -30,6 +30,7 @@ export const Survezy = ({ path, link, sx }) => {
     axios
       .get(`https://karishma7.herokuapp.com/${surveyEndpoint}`)
       .then((response) => setSurvey(response.data))
+      .catch(() => {})
   }, [path, link])
 
   if (survey === null) return null
@@ -108,6 +109,7 @@ const Survey = ({ path, questions, onFinish }) => {
         answers
       })
       .then(() => dispatch({ type: 'submitted' }))
+      .catch(() => {})
   }
 
   if (state.submitted) return <h1>Thanks</h1>
