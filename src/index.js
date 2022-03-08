@@ -50,10 +50,7 @@ export const Survezy = ({ path, link, sx }) => {
           questions={survey.questions}
           onFinish={() => setSurvey(null)}
         />
-        <Typography className={styles.watermark}>
-          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-          &nbsp; &nbsp; Powered by @<a href='https://google.com'>Survezy</a>
-        </Typography>
+        <PoweredBy />
       </Box>
     </Slide>
   )
@@ -347,3 +344,19 @@ const SurveyController = ({ isLastQuestion, onNext, onSubmit }) => {
     </div>
   )
 }
+
+const PoweredBy = () => (
+  <Typography
+    align='center'
+    sx={{
+      fontSize: 12,
+      color: '#c4c4c4',
+      mt: 2
+    }}
+  >
+    Powered by @
+    <a href='http://35.154.113.16/' target='_blank' rel='noreferrer'>
+      Survezy
+    </a>
+  </Typography>
+)
