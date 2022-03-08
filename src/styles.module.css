@@ -48,6 +48,8 @@
 	width: 100%;
 }
 .watermark{
+	position: inherit;
+	bottom: 33px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -104,5 +106,8 @@
 		box-sizing: border-box;
 		background: #fff;
 		z-index: 99999;
+	}
+	.watermark {
+		bottom: 12px;
 	}
 }

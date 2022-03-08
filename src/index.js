@@ -49,7 +49,7 @@ export const Survezy = ({ path, link, sx }) => {
           onFinish={() => setSurvey(null)}
         />
         <Typography className={styles.watermark}>
-          Powered by @<a href='https://google.com'>Survezy</a>
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Powered by @<a href='https://google.com'>Survezy</a>
         </Typography>
       </Box>
     </Slide>
