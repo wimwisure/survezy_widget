@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@700&display=swap');
+
+
 :root {
 	--primary_color: rgba(17, 24, 39, 1)!important;
 	--color_opacity: 14px!important;
@@ -13,7 +16,33 @@
 	--corner_radius: 10px!important;
 	--bg-color: #000!important
 }
-
+.survezy_question{
+	font-family: 'Source Sans Pro', sans-serif;
+	margin-bottom:15px !important;
+	line-height: 21px !important;
+	font-weight: 700 !important;
+}
+.survezy_button{
+	margin-top: 15px !important;
+	background-color: #000;
+}
+.option_box{
+	font-family: 'Source Sans Pro', sans-serif;;
+	width: 100%;
+	padding: 6px 10px;
+	line-height: 28px;
+	font-size: 15px;
+	cursor: pointer;
+	margin-bottom: 9px;
+	padding-left: 5px;
+	display: block;
+	border: 1px solid #c4c4c4;
+	border-radius: 5px;
+	font-weight: 400 !important;
+}
+.form_control{
+	width: 100%;
+}
 @media(min-width:600px) {
 
 	.survezy_box {
@@ -30,6 +59,8 @@
 		z-index: 99999999999999999999999;
 		box-shadow: 0 20px 40px rgb(0 0 0 / 25%);
 	}
+	
+	
 }
 
 @media(max-width:370px) {

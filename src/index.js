@@ -28,7 +28,7 @@ export const Survezy = ({ path, link, sx }) => {
       : `container/survey/${link}`
 
     axios
-      .get(`https://karishma7.herokuapp.com/${surveyEndpoint}`)
+      .get(`http://35.154.113.16/${surveyEndpoint}`)
       .then((response) => setSurvey(response.data))
       .catch(() => {})
   }, [path, link])
@@ -105,7 +105,7 @@ const Survey = ({ path, questions, onFinish }) => {
     )
 
     axios
-      .post(`https://karishma7.herokuapp.com/survey/response/${path}`, {
+      .post(`http://35.154.113.16/survey/response/${path}`, {
         answers
       })
       .then(() => dispatch({ type: 'submitted' }))
@@ -146,11 +146,13 @@ const Survey = ({ path, questions, onFinish }) => {
 }
 
 const QuestionTitle = ({ text }) => (
-  <Typography component='legend'>{text}</Typography>
+  <Typography component='legend' className={styles.survezy_question}>
+    {text}
+  </Typography>
 )
 
 const DropDownOptions = ({ options, answer, setAnswer }) => (
-  <FormControl>
+  <FormControl className={styles.form_control}>
     <RadioGroup
       value={answer ?? ''}
       onChange={(e) => setAnswer(e.target.value)}
@@ -161,6 +163,7 @@ const DropDownOptions = ({ options, answer, setAnswer }) => (
           value={index}
           control={<Radio />}
           label={option}
+          className={styles.option_box}
         />
       ))}
     </RadioGroup>
@@ -178,7 +181,7 @@ const MultipleChoiceOptions = ({ options, answer, setAnswer }) => {
   }
 
   return (
-    <FormGroup>
+    <FormGroup className={styles.form_control}>
       {options.map((option, index) => (
         <Box key={index}>
           <FormControlLabel
@@ -191,6 +194,7 @@ const MultipleChoiceOptions = ({ options, answer, setAnswer }) => {
               />
             }
             label={option}
+            className={styles.option_box}
           />
         </Box>
       ))}
@@ -303,7 +307,11 @@ const SurveyController = ({ isLastQuestion, onNext, onSubmit }) => {
   if (isLastQuestion)
     return (
       <div>
-        <Button variant='contained' onClick={onSubmit}>
+        <Button
+          variant='contained'
+          onClick={onSubmit}
+          className={styles.survezy_button}
+        >
           Submit
         </Button>
       </div>
@@ -311,7 +319,11 @@ const SurveyController = ({ isLastQuestion, onNext, onSubmit }) => {
 
   return (
     <div>
-      <Button variant='contained' onClick={onNext}>
+      <Button
+        variant='contained'
+        onClick={onNext}
+        className={styles.survezy_button}
+      >
         Next
       </Button>
     </div>
