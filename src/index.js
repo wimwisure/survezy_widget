@@ -48,6 +48,9 @@ export const Survezy = ({ path, link, sx }) => {
           questions={survey.questions}
           onFinish={() => setSurvey(null)}
         />
+        <Typography className={styles.watermark}>
+          Powered by @<a href='https://google.com'>Survezy</a>
+        </Typography>
       </Box>
     </Slide>
   )
@@ -213,7 +216,7 @@ const EmojiRatingOptions = ({ answer, setAnswer }) => {
         'emojione:grinning-face'
       ].map((emoji, index) => (
         <IconButton key={index} onClick={() => setAnswer(index.toString())}>
-          <Icon icon={emoji} width='48' height='48' />
+          <Icon icon={emoji} width='40' height='40' />
         </IconButton>
       ))}
     </div>

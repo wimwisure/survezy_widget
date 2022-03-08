@@ -43,6 +43,18 @@
 .form_control{
 	width: 100%;
 }
+.watermark{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 12px !important;
+	font-weight: 400 !important;
+	color: #c4c4c4;
+	line-height: 16px;
+}
+.watermark a {
+	text-decoration: none;
+}
 @media(min-width:600px) {
 
 	.survezy_box {
