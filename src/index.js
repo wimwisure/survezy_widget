@@ -19,6 +19,8 @@ import axios from 'axios'
 import React, { useEffect, useReducer, useState } from 'react'
 import styles from './styles.module.css'
 
+const notAutoNext = ['PARAGRAPH', 'MULTIPLE_CHOICE', 'SHORT_ANSWER']
+
 export const Survezy = ({ path, link, sx }) => {
   const [survey, setSurvey] = useState(null)
 
@@ -30,7 +32,7 @@ export const Survezy = ({ path, link, sx }) => {
     axios
       .get(`http://35.154.113.16/${surveyEndpoint}`)
       .then((response) => setSurvey(response.data))
-      .catch(() => {})
+      .catch((e) => console.log(e))
   }, [path, link])
 
   if (survey === null) return null
@@ -49,7 +51,8 @@ export const Survezy = ({ path, link, sx }) => {
           onFinish={() => setSurvey(null)}
         />
         <Typography className={styles.watermark}>
-          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Powered by @<a href='https://google.com'>Survezy</a>
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          &nbsp; &nbsp; Powered by @<a href='https://google.com'>Survezy</a>
         </Typography>
       </Box>
     </Slide>
@@ -63,22 +66,26 @@ const surveyReducer = (state, { type, payload }) => {
 
     const shouldMove =
       state.currentQuestionIndex !== state.questions.length - 1 &&
-      !['MULTIPLE_CHOICE', 'SHORT_ANSWER', 'PARAGRAPH'].includes(
-        payload.questionType
-      )
+      !notAutoNext.includes(payload.questionType)
+
+    const updateQuestionIndex = state.currentQuestionIndex + (shouldMove ? 1 : 0)
 
     return {
       ...state,
       answers,
       error: '',
-      currentQuestionIndex: state.currentQuestionIndex + (shouldMove ? 1 : 0)
+      currentQuestionIndex: updateQuestionIndex,
+      showNext: notAutoNext.includes(state.questions[updateQuestionIndex].type)
     }
   }
 
   if (type === 'next') {
+    const updatedQuestionIndex = state.currentQuestionIndex + 1
+
     return {
       ...state,
-      currentQuestionIndex: state.currentQuestionIndex + 1
+      currentQuestionIndex: updatedQuestionIndex,
+      showNext: notAutoNext.includes(state.questions[updatedQuestionIndex].type)
     }
   }
 
@@ -88,6 +95,8 @@ const surveyReducer = (state, { type, payload }) => {
       submitted: true
     }
   }
+
+  return state
 }
 
 const Survey = ({ path, questions, onFinish }) => {
@@ -95,12 +104,17 @@ const Survey = ({ path, questions, onFinish }) => {
     questions,
     answers: [],
     currentQuestionIndex: 0,
-    submitted: false
+    submitted: false,
+    showNext: notAutoNext.includes(questions[0].type)
   })
 
   useEffect(() => {
     if (state.submitted) onFinish()
   }, [state.submitted])
+
+  useEffect(() => {
+    console.log(state)
+  }, [state])
 
   const handleSubmit = () => {
     const answers = state.questions.map((_, i) =>
@@ -112,7 +126,7 @@ const Survey = ({ path, questions, onFinish }) => {
         answers
       })
       .then(() => dispatch({ type: 'submitted' }))
-      .catch(() => {})
+      .catch((e) => console.log(e))
   }
 
   if (state.submitted) return <h1>Thanks</h1>
@@ -137,13 +151,15 @@ const Survey = ({ path, questions, onFinish }) => {
         }
       />
 
-      <SurveyController
-        isLastQuestion={
-          state.currentQuestionIndex === state.questions.length - 1
-        }
-        onNext={() => dispatch({ type: 'next' })}
-        onSubmit={handleSubmit}
-      />
+      {state.showNext && (
+        <SurveyController
+          isLastQuestion={
+            state.currentQuestionIndex === state.questions.length - 1
+          }
+          onNext={() => dispatch({ type: 'next' })}
+          onSubmit={handleSubmit}
+        />
+      )}
     </div>
   )
 }
@@ -242,7 +258,6 @@ const ParagraphOption = ({ answer, setAnswer }) => {
       multiline
       label='Answer'
       rows={3}
-      maxRows={3}
       value={answer ?? ''}
       onChange={(e) => setAnswer(e.target.value)}
     />
