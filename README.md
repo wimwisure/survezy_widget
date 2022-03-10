@@ -33,7 +33,7 @@ class Example extends Component {
   <meta charset="utf-8">
   <title>Survezy JS</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <script defer="defer" src="https://karishma7.herokuapp.com/survezy/1.0.13/survezy.js"></script>
+  <script defer="defer" src="https://karishma7.herokuapp.com/survezy/1.0.14/survezy.js"></script>
 </head>
 
 <body>
