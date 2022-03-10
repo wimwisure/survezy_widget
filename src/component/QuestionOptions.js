@@ -48,7 +48,9 @@ export const QuestionOptions = ({
 
 const MultipleChoiceOptions = ({ options, answer, setAnswer }) => {
   const handleCheckedChange = (index, checked) => {
-    const updatedChecks = [...(answer ?? new Array(options.length).fill('0'))]
+    const updatedChecks =
+      answer?.split('') ?? new Array(options.length).fill('0')
+
     updatedChecks[index] = checked ? '1' : '0'
 
     const allUnchecked = updatedChecks.every((c) => c === '0')
