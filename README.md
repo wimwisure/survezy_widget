@@ -18,7 +18,7 @@ import 'survezy_widget/dist/index.css'
 
 class Example extends Component {
   render() {
-     <Survezy link={"container_link"} />
+     <Survezy link={"container_link"} darkMode />
   }
 }
 ```
@@ -33,7 +33,7 @@ class Example extends Component {
   <meta charset="utf-8">
   <title>Survezy JS</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <script defer="defer" src="https://karishma7.herokuapp.com/survezy/1.0.15/survezy.js"></script>
+  <script defer="defer" src="https://karishma7.herokuapp.com/survezy/1.0.16/survezy.js"></script>
 </head>
 
 <body>

@@ -231,7 +231,7 @@ const RatingOptions = ({ setAnswer }) => (
       .fill('noto:star')
       .map((emoji, index) => (
         <ListItem key={index} sx={{ m: 0, p: 0 }}>
-          <IconButton onClick={() => setAnswer(index)}>
+          <IconButton onClick={() => setAnswer(index.toString())}>
             <Icon icon={emoji} width='40' height='40' />
           </IconButton>
         </ListItem>

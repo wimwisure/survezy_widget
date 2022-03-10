@@ -58,10 +58,6 @@ export const Survey = ({ questions, onFinish }) => {
   })
 
   useEffect(() => {
-    console.log(state)
-  }, [state])
-
-  useEffect(() => {
     if (state.completed) handleSubmit()
   }, [state.completed])
 
