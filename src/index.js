@@ -1,4 +1,4 @@
-import { Box, Slide, createTheme, ThemeProvider } from '@mui/material'
+import { Box, Slide, createTheme, ThemeProvider, Button } from '@mui/material'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { styled } from '@mui/material/styles'
@@ -29,6 +29,7 @@ const Root = styled('div')(({ theme }) => ({
 
 export const Survezy = ({ path, link, sx, darkMode }) => {
   const [survey, setSurvey] = useState(null)
+  const [slideIn, setSlideIn] = useState(true)
 
   useEffect(() => {
     const surveyEndpoint = path
@@ -42,7 +43,7 @@ export const Survezy = ({ path, link, sx, darkMode }) => {
   }, [path, link])
 
   const handleFinish = (answers) => {
-    setSurvey(null)
+    setSlideIn(false)
 
     axios
       .post(`http://35.154.113.16/survey/response/${survey.path}`, {
@@ -55,7 +56,12 @@ export const Survezy = ({ path, link, sx, darkMode }) => {
 
   return (
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
-      <Slide in direction='up' sx={{ position: 'fixed', ...sx }}>
+      <Slide
+        in={slideIn}
+        timeout={1000}
+        direction='up'
+        sx={{ position: 'fixed', ...sx }}
+      >
         <Root>
           <Box>
             <Survey questions={survey.questions} onFinish={handleFinish} />

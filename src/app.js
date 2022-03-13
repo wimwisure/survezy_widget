@@ -2,11 +2,18 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Survezy } from './index'
 
-export const init = (link) => {
+export const Show = (link) => {
+  // eslint-disable-next-line no-unused-expressions
+  document.getElementById('survezy_container')?.remove()
+  const div = document.createElement('div')
+  div.setAttribute('id', 'survezy_container')
+
+  document.body.appendChild(div)
+
   ReactDOM.render(
     <React.StrictMode>
-      <Survezy key={Math.floor(Math.random() * 10000)} link={link} />
+      <Survezy link={link} />
     </React.StrictMode>,
-    document.getElementById('survezy')
+    div
   )
 }
