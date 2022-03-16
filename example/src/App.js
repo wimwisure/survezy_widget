@@ -4,7 +4,7 @@ import { Survezy } from 'survezy_widget'
 import 'survezy_widget/dist/index.css'
 
 const App = () => {
-  return <Survezy link={"c2F1cmF2QHdpbXdpc3VyZS5jb20gTmV3IGNvbnRhaW5lcg=="} />
+  return <Survezy link={"cml0aWtrcjI0MDVAZ21haWwuY29tIHN1cnZlenlfbG9naW5QYWdl"} />
 }
 
 export default App

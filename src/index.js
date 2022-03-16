@@ -37,7 +37,7 @@ export const Survezy = ({ path, link, sx, darkMode }) => {
       : `container/survey/${link}`
 
     axios
-      .get(`http://35.154.113.16/${surveyEndpoint}`)
+      .get(`https://35.154.113.16/${surveyEndpoint}`)
       .then((response) => setSurvey(response.data))
       .catch((e) => console.log(e))
   }, [path, link])
@@ -46,7 +46,7 @@ export const Survezy = ({ path, link, sx, darkMode }) => {
     setSlideIn(false)
 
     axios
-      .post(`http://35.154.113.16/survey/response/${survey.path}`, {
+      .post(`https://35.154.113.16/survey/response/${survey.path}`, {
         answers
       })
       .catch((e) => console.log(e))
