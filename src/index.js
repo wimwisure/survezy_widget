@@ -46,7 +46,7 @@ export const Survezy = ({ path, link, sx, darkMode }) => {
     setSlideIn(false)
 
     axios
-      .post(`https://35.154.113.16/survey/response/${survey.path}`, {
+      .post(`https://35.154.113.16/survey/response/${survey.id}`, {
         answers
       })
       .catch((e) => console.log(e))
