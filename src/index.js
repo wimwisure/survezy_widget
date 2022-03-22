@@ -27,26 +27,26 @@ const Root = styled('div')(({ theme }) => ({
   }
 }))
 
-export const Survezy = ({ path, link, sx, darkMode }) => {
+export const Survezy = ({ path, code, sx, darkMode }) => {
   const [survey, setSurvey] = useState(null)
   const [slideIn, setSlideIn] = useState(true)
 
   useEffect(() => {
     const surveyEndpoint = path
       ? `survey/details/${path}`
-      : `container/survey/${link}`
+      : `container/survey/${code}`
 
     axios
-      .get(`https://35.154.113.16/${surveyEndpoint}`)
+      .get(`https://survezy.in/${surveyEndpoint}`)
       .then((response) => setSurvey(response.data))
       .catch((e) => console.log(e))
-  }, [path, link])
+  }, [path, code])
 
   const handleFinish = (answers) => {
     setSlideIn(false)
 
     axios
-      .post(`https://35.154.113.16/survey/response/${survey.id}`, {
+      .post(`https://survezy.in/survey/response/${survey.id}`, {
         answers
       })
       .catch((e) => console.log(e))
