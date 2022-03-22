@@ -18,7 +18,7 @@ import 'survezy_widget/dist/index.css'
 
 class Example extends Component {
   render() {
-     <Survezy link={"event_code"} darkMode />
+     <Survezy code={"event_code"} darkMode />
   }
 }
 ```
