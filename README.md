@@ -18,7 +18,7 @@ import 'survezy_widget/dist/index.css'
 
 class Example extends Component {
   render() {
-     <Survezy code={"event_code"} darkMode />
+     <Survezy eventId={"eventId"} darkMode />
   }
 }
 ```
@@ -33,12 +33,12 @@ class Example extends Component {
   <meta charset="utf-8">
   <title>Survezy JS</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <script defer="defer" src="https://survezy.in//survezy/1.0.21/survezy.js"></script>
+  <script defer="defer" src="https://survezy.in//survezy/1.0.22/survezy.js"></script>
 </head>
 
 <body>
   <button type="button"
-    onClick="(function(){survezy.Show('event_code');})();">
+    onClick="(function(){survezy.Show('eventId');})();">
     Open Survey
   </button>
 
