@@ -27,20 +27,20 @@ const Root = styled('div')(({ theme }) => ({
   }
 }))
 
-export const Survezy = ({ path, code, sx, darkMode }) => {
+export const Survezy = ({ path, eventId, sx, darkMode }) => {
   const [survey, setSurvey] = useState(null)
   const [slideIn, setSlideIn] = useState(true)
 
   useEffect(() => {
     const surveyEndpoint = path
       ? `survey/details/${path}`
-      : `container/survey/${code}`
+      : `container/survey/${eventId}`
 
     axios
       .get(`https://survezy.in/${surveyEndpoint}`)
       .then((response) => setSurvey(response.data))
       .catch((e) => console.log(e))
-  }, [path, code])
+  }, [path, eventId])
 
   const handleFinish = (answers) => {
     setSlideIn(false)
