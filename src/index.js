@@ -37,7 +37,7 @@ export const Survezy = ({ path, eventId, sx, darkMode }) => {
       : `container/survey/${eventId}`
 
     axios
-      .get(`https://survezy.in/${surveyEndpoint}`)
+      .get(`https://api.survezy.in/${surveyEndpoint}`)
       .then((response) => setSurvey(response.data))
       .catch((e) => console.log(e))
   }, [path, eventId])
@@ -46,7 +46,7 @@ export const Survezy = ({ path, eventId, sx, darkMode }) => {
     setSlideIn(false)
 
     axios
-      .post(`https://survezy.in/survey/response/${survey.id}`, {
+      .post(`https://api.survezy.in/survey/response/${survey.id}`, {
         answers
       })
       .catch((e) => console.log(e))
