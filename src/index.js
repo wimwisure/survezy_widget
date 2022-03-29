@@ -32,6 +32,16 @@ export const Survezy = ({ path, eventId, sx, darkMode }) => {
   const [slideIn, setSlideIn] = useState(true)
 
   useEffect(() => {
+    if (survey) console.log('start') 
+  }, [survey])
+
+  useEffect(() => {
+    if (!slideIn) setTimeout(() => {
+      console.log('close')
+    }, 1000)
+  }, [slideIn])
+
+  useEffect(() => {
     const surveyEndpoint = path
       ? `survey/details/${path}`
       : `container/survey/${eventId}`

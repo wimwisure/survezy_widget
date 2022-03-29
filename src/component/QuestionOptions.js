@@ -140,8 +140,8 @@ const ParagraphOptions = ({ answer, setAnswer }) => {
     <OutlinedInput
       size='small'
       fullWidth
-      multiline
       placeholder='Answer'
+      multiline
       rows={3}
       value={answer ?? ''}
       onChange={(e) => setAnswer(e.target.value)}
