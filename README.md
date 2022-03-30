@@ -33,7 +33,7 @@ class Example extends Component {
   <meta charset="utf-8">
   <title>Survezy JS</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <script defer="defer" src="https://survezy.in//survezy/1.0.23/survezy.js"></script>
+  <script defer="defer" src="https://api.survezy.in/survezy/1.0.25/survezy.js"></script>
 </head>
 
 <body>
@@ -45,4 +45,48 @@ class Example extends Component {
 </body>
 
 </html>
+```
+
+### Android
+
+> Install via gradle
+
+```groovy
+  allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+> If your gradle version is higher than 6.5, add the below code in settings.gradle.
+
+```groovy
+dependencyResolutionManagement {
+    ...
+    repositories {
+        ...
+        maven{url 'https://jitpack.io'}
+    }
+}
+```
+
+> Add dependency in your app's build.gradle file
+```groovy
+defaultConfig {
+    ....
+    minSdkVersion 21
+}
+
+dependencies {
+    implementation 'com.github.wimwisure:survezy_android:1.3'
+}
+```
+
+> Uses
+
+```kt
+val survezy = Survezy(context)
+
+survezy.show(eventId)
 ```
