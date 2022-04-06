@@ -29,7 +29,7 @@ const App = () => {
     ]
   }
 
-  return <Survezy demoSurvey={demoSurvey} currentIndex={1} />
+  return <Survezy eventId="c2F1cmF2QHdpbXdpc3VyZS5jb20gc3VydmV6eQ==" />
 }
 
 export default App
