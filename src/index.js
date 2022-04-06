@@ -1,4 +1,4 @@
-import { Box, Slide, createTheme, ThemeProvider, Button } from '@mui/material'
+import { Box, Slide, createTheme, ThemeProvider } from '@mui/material'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { styled } from '@mui/material/styles'
@@ -27,39 +27,49 @@ const Root = styled('div')(({ theme }) => ({
   }
 }))
 
-export const Survezy = ({ path, eventId, sx, darkMode }) => {
-  const [survey, setSurvey] = useState(null)
+export const Survezy = ({ path, eventId, sx, darkMode, demoSurvey }) => {
+  const [survey, setSurvey] = useState(demoSurvey ?? null)
   const [slideIn, setSlideIn] = useState(true)
 
   useEffect(() => {
-    if (survey) console.log('start') 
+    if (survey) console.log('start')
   }, [survey])
 
   useEffect(() => {
-    if (!slideIn) setTimeout(() => {
-      console.log('close')
-    }, 1000)
+    if (!slideIn)
+      setTimeout(() => {
+        console.log('close')
+      }, 1000)
   }, [slideIn])
 
-  useEffect(() => {
+  const fetchSurvey = () => {
     const surveyEndpoint = path
       ? `survey/details/${path}`
       : `container/survey/${eventId}`
-
     axios
       .get(`https://api.survezy.in/${surveyEndpoint}`)
       .then((response) => setSurvey(response.data))
       .catch((e) => console.log(e))
+  }
+  useEffect(() => {
+    if (!demoSurvey) {
+      fetchSurvey()
+    }
   }, [path, eventId])
 
-  const handleFinish = (answers) => {
-    setSlideIn(false)
-
+  const postSurvey = (answers) => {
     axios
       .post(`https://api.survezy.in/survey/response/${survey.id}`, {
         answers
       })
       .catch((e) => console.log(e))
+  }
+
+  const handleFinish = (answers) => {
+    setSlideIn(false)
+    if (!demoSurvey) {
+      postSurvey(answers)
+    }
   }
 
   if (survey === null) return null
