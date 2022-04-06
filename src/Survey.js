@@ -49,11 +49,11 @@ const surveyReducer = (state, { type, payload }) => {
   return state
 }
 
-export const Survey = ({ questions, onFinish }) => {
+export const Survey = ({ questions, onFinish, currentIndex }) => {
   const [state, dispatch] = useReducer(surveyReducer, {
     questions,
     answers: [],
-    currentQuestionIndex: 0,
+    currentQuestionIndex: currentIndex ?? 0,
     completed: false
   })
 

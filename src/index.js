@@ -27,7 +27,14 @@ const Root = styled('div')(({ theme }) => ({
   }
 }))
 
-export const Survezy = ({ path, eventId, sx, darkMode, demoSurvey }) => {
+export const Survezy = ({
+  path,
+  eventId,
+  sx,
+  darkMode,
+  demoSurvey,
+  currentIndex
+}) => {
   const [survey, setSurvey] = useState(demoSurvey ?? null)
   const [slideIn, setSlideIn] = useState(true)
 
@@ -58,6 +65,7 @@ export const Survezy = ({ path, eventId, sx, darkMode, demoSurvey }) => {
   }, [path, eventId])
 
   const postSurvey = (answers) => {
+    setSlideIn(false)
     axios
       .post(`https://api.survezy.in/survey/response/${survey.id}`, {
         answers
@@ -66,7 +74,6 @@ export const Survezy = ({ path, eventId, sx, darkMode, demoSurvey }) => {
   }
 
   const handleFinish = (answers) => {
-    setSlideIn(false)
     if (!demoSurvey) {
       postSurvey(answers)
     }
@@ -84,7 +91,11 @@ export const Survezy = ({ path, eventId, sx, darkMode, demoSurvey }) => {
       >
         <Root>
           <Box>
-            <Survey questions={survey.questions} onFinish={handleFinish} />
+            <Survey
+              questions={survey.questions}
+              onFinish={handleFinish}
+              currentIndex={currentIndex}
+            />
           </Box>
         </Root>
       </Slide>

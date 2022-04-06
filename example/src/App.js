@@ -4,7 +4,32 @@ import { Survezy } from 'survezy_widget'
 import 'survezy_widget/dist/index.css'
 
 const App = () => {
-  return <Survezy eventId={"c2F1cmF2QHdpbXdpc3VyZS5jb20gc3VydmV6eQ=="} />
+  const demoSurvey = {
+    questions: [
+      {
+       text: "How's Your day going",
+       type: "DROPDOWN",
+       options: [
+         "GOOD", "FINE", "BAD"
+       ]
+      },
+      {
+        text: "Product Review",
+        type: "RATING",
+        options: []
+      },
+       {
+        text: "DROPDOWN 3",
+        type: "DROPDOWN",
+        options: [
+          "Excellent", "FINE", "BAD"
+        ]
+       },
+
+    ]
+  }
+
+  return <Survezy demoSurvey={demoSurvey} currentIndex={1} />
 }
 
 export default App
