@@ -89,6 +89,7 @@ export const Survezy = ({
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <Slide
         in={slideIn}
+        key={demoSurvey ?? survey}
         timeout={1000}
         direction='up'
         sx={{ position: 'fixed', ...sx }}
