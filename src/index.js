@@ -61,6 +61,9 @@ export const Survezy = ({
 
   useEffect(() => {
     console.log("updating survey")
+    console.log("old survey", survey)
+    console.log("new survey", demoSurvey)
+
     if (!demoSurvey) fetchSurvey()
     else setSurvey(demoSurvey)
   }, [demoSurvey, setSurvey])
