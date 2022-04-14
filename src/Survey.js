@@ -50,7 +50,7 @@ const surveyReducer = (state, { type, payload }) => {
     return {
       ...state,
       questions: payload.questions,
-      currentQuestionIndex: 0,
+      currentQuestionIndex: payload.currentIndex,
     }
   }
 
@@ -66,8 +66,8 @@ export const Survey = ({ questions, onFinish, currentIndex }) => {
   })
 
   useEffect(() => {
-    dispatch({ type: "update_questions", payload: { questions } })
-  }, [questions])
+    dispatch({ type: "update_questions", payload: { questions, currentIndex } })
+  }, [questions, currentIndex])
 
   useEffect(() => {
     if (state.completed) handleSubmit()
