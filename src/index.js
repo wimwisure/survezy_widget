@@ -62,7 +62,6 @@ export const Survezy = ({
     if (!demoSurvey) {
       fetchSurvey()
     } else {
-      console.log(demoSurvey)
       setSurvey(demoSurvey)
     }
   }, [path, eventId, demoSurvey])
