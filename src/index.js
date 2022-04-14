@@ -35,7 +35,7 @@ export const Survezy = ({
   demoSurvey,
   currentIndex
 }) => {
-  const [survey, setSurvey] = useState(demoSurvey ?? null)
+  const [survey, setSurvey] = useState(null)
   const [slideIn, setSlideIn] = useState(true)
 
   useEffect(() => {
@@ -60,8 +60,9 @@ export const Survezy = ({
   }
 
   useEffect(() => {
-    if (!survey) fetchSurvey()
-  }, [survey])
+    if (!demoSurvey) fetchSurvey()
+    else setSurvey(demoSurvey)
+  }, [demoSurvey, setSurvey])
 
   const postSurvey = (answers) => {
     setSlideIn(false)
