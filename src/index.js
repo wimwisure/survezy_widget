@@ -35,7 +35,7 @@ export const Survezy = ({
   demoSurvey,
   currentIndex
 }) => {
-  const [survey, setSurvey] = useState(null)
+  const [survey, setSurvey] = useState(demoSurvey ?? null)
   const [slideIn, setSlideIn] = useState(true)
 
   useEffect(() => {
@@ -58,13 +58,10 @@ export const Survezy = ({
       .then((response) => setSurvey(response.data))
       .catch((e) => console.log(e))
   }
+
   useEffect(() => {
-    if (!demoSurvey) {
-      fetchSurvey()
-    } else {
-      setSurvey(demoSurvey)
-    }
-  }, [path, eventId, demoSurvey])
+    if (!survey) fetchSurvey()
+  }, [survey])
 
   const postSurvey = (answers) => {
     setSlideIn(false)
