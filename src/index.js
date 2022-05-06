@@ -5,6 +5,7 @@ import { styled } from '@mui/material/styles'
 import './index.css'
 import { Survey } from './Survey'
 
+
 const lightTheme = createTheme()
 
 const darkTheme = createTheme({
@@ -54,7 +55,7 @@ export const Survezy = ({
       ? `survey/details/${path}`
       : `container/survey/${eventId}`
     axios
-      .get(`https://api.survezy.in/${surveyEndpoint}`)
+      .get(`https://api.survezy.app/${surveyEndpoint}`)
       .then((response) => setSurvey(response.data))
       .catch((e) => console.log(e))
   }
@@ -67,7 +68,7 @@ export const Survezy = ({
   const postSurvey = (answers) => {
     setSlideIn(false)
     axios
-      .post(`https://api.survezy.in/survey/response/${survey.id}`, {
+      .post(`https://api.survezy.app/survey/response/${survey.id}`, {
         answers
       })
       .catch((e) => console.log(e))
