@@ -5,6 +5,7 @@ import 'survezy_widget/dist/index.css'
 
 const App = () => {
   const demoSurvey2 = {
+    currentIndex: 0,
     questions: [
       {
         id: 1649417569002,
@@ -27,6 +28,7 @@ const App = () => {
 
 
   const demoSurvey = {
+    currentIndex: 0,
     questions: [
       {
         text: "How's Your day going",

@@ -34,9 +34,8 @@ export const Survezy = ({
   sx,
   darkMode,
   demoSurvey,
-  currentIndex
 }) => {
-  const [survey, setSurvey] = useState(null)
+  const [survey, setSurvey] = useState(demoSurvey)
   const [slideIn, setSlideIn] = useState(true)
 
   useEffect(() => {
@@ -93,11 +92,20 @@ export const Survezy = ({
       >
         <Root>
           <Box>
-            <Survey
-              questions={survey.questions}
-              onFinish={handleFinish}
-              currentIndex={currentIndex}
-            />
+            {
+              demoSurvey ? (
+                <Survey
+                  questions={demoSurvey.questions}
+                  onFinish={handleFinish}
+                  currentIndex={demoSurvey?.currentIndex}
+                />
+              ) : (
+                <Survey
+                  questions={survey.questions}
+                  onFinish={handleFinish}
+                />
+              )
+            }
           </Box>
         </Root>
       </Slide>
