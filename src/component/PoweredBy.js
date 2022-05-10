@@ -16,7 +16,7 @@ export const PoweredBy = () => (
       underline='hover'
       target='_blank'
       rel='noopener'
-      href='https://www.survezy.in/'
+      href='https://www.survezy.app/'
     >
       Survezy
     </Link>

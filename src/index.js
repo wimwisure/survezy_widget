@@ -35,7 +35,7 @@ export const Survezy = ({
   darkMode,
   demoSurvey,
 }) => {
-  const [survey, setSurvey] = useState(demoSurvey)
+  const [survey, setSurvey] = useState(demoSurvey ?? null)
   const [slideIn, setSlideIn] = useState(true)
 
   useEffect(() => {
@@ -50,9 +50,10 @@ export const Survezy = ({
   }, [slideIn])
 
   const fetchSurvey = () => {
-    const surveyEndpoint = path
+    const surveyEndpoint = path !== undefined
       ? `survey/details/${path}`
       : `container/survey/${eventId}`
+
     axios
       .get(`https://api.survezy.app/${surveyEndpoint}`)
       .then((response) => setSurvey(response.data))
@@ -60,9 +61,8 @@ export const Survezy = ({
   }
 
   useEffect(() => {
-    if (!demoSurvey) fetchSurvey()
-    else setSurvey(demoSurvey)
-  }, [demoSurvey, setSurvey])
+    if (survey === null) fetchSurvey()
+  }, [survey])
 
   const postSurvey = (answers) => {
     setSlideIn(false)
@@ -74,7 +74,7 @@ export const Survezy = ({
   }
 
   const handleFinish = (answers) => {
-    if (!demoSurvey) {
+    if (demoSurvey === undefined) {
       postSurvey(answers)
     }
   }
@@ -92,20 +92,10 @@ export const Survezy = ({
       >
         <Root>
           <Box>
-            {
-              demoSurvey ? (
-                <Survey
-                  questions={demoSurvey.questions}
-                  onFinish={handleFinish}
-                  currentIndex={demoSurvey?.currentIndex}
-                />
-              ) : (
-                <Survey
-                  questions={survey.questions}
-                  onFinish={handleFinish}
-                />
-              )
-            }
+            <Survey
+              questions={survey.questions}
+              onFinish={handleFinish}
+            />
           </Box>
         </Root>
       </Slide>

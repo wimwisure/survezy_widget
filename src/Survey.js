@@ -50,24 +50,23 @@ const surveyReducer = (state, { type, payload }) => {
     return {
       ...state,
       questions: payload.questions,
-      currentQuestionIndex: payload.currentIndex,
     }
   }
 
   return state
 }
 
-export const Survey = ({ questions, onFinish, currentIndex }) => {
+export const Survey = ({ questions, onFinish }) => {
   const [state, dispatch] = useReducer(surveyReducer, {
     questions,
     answers: [],
-    currentQuestionIndex: currentIndex ?? 0,
+    currentQuestionIndex: 0,
     completed: false
   })
 
   useEffect(() => {
-    dispatch({ type: "update_questions", payload: { questions, currentIndex } })
-  }, [questions, currentIndex])
+    dispatch({ type: "update_questions", payload: { questions } })
+  }, [questions])
 
   useEffect(() => {
     if (state.completed) handleSubmit()
