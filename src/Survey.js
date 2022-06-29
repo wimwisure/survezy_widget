@@ -4,7 +4,8 @@ import {
   CardContent,
   CardHeader,
   Grow,
-  IconButton
+  IconButton,
+  Typography
 } from '@mui/material'
 import React, { useEffect, useReducer } from 'react'
 import { Icon } from '@iconify/react'
@@ -57,6 +58,7 @@ const surveyReducer = (state, { type, payload }) => {
 }
 
 export const Survey = ({ questions, onFinish }) => {
+  const [showReqError, setShowReqError] = React.useState(false)
   const [state, dispatch] = useReducer(surveyReducer, {
     questions,
     answers: [],
@@ -87,13 +89,18 @@ export const Survey = ({ questions, onFinish }) => {
   return (
     <Card>
       <CardHeader
-        subheader={state.questions[state.currentQuestionIndex].text}
+        title={<Typography>{state.questions[state.currentQuestionIndex].text}</Typography>}
         subheaderTypographyProps={{
           fontFamily: 'Acme'
         }}
+        subheader={showReqError ?<Typography sx={{fontSize: '10px', color:'red'}}>*This question is required</Typography>: null}
         action={
           !hideAction && (
-            <IconButton onClick={() => dispatch({ type: 'next' })}>
+            <IconButton onClick={() => {
+              state.questions[state.currentQuestionIndex].required ? setShowReqError(true):  
+              dispatch({ type: 'next' })
+              
+              }}>
               <Icon icon='bx:right-arrow-circle' width='32' height='32' />
             </IconButton>
           )
@@ -120,6 +127,7 @@ export const Survey = ({ questions, onFinish }) => {
                 options={state.questions[state.currentQuestionIndex].options}
                 answer={state.answers[state.currentQuestionIndex]}
                 setAnswer={(answer) => {
+                  setShowReqError(false)
                   dispatch({
                     type: 'answer',
                     payload: {
