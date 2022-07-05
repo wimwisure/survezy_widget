@@ -47,10 +47,10 @@ const surveyReducer = (state, { type, payload }) => {
     }
   }
 
-  if (type === "update_questions") {
+  if (type === 'update_questions') {
     return {
       ...state,
-      questions: payload.questions,
+      questions: payload.questions
     }
   }
 
@@ -59,6 +59,7 @@ const surveyReducer = (state, { type, payload }) => {
 
 export const Survey = ({ questions, onFinish }) => {
   const [showReqError, setShowReqError] = React.useState(false)
+  const welcomeGreeting = "<h4 > Thank you 🙏</h4>";
   const [state, dispatch] = useReducer(surveyReducer, {
     questions,
     answers: [],
@@ -67,7 +68,7 @@ export const Survey = ({ questions, onFinish }) => {
   })
 
   useEffect(() => {
-    dispatch({ type: "update_questions", payload: { questions } })
+    dispatch({ type: 'update_questions', payload: { questions } })
   }, [questions])
 
   useEffect(() => {
@@ -78,7 +79,10 @@ export const Survey = ({ questions, onFinish }) => {
     const answers = state.questions.map((_, i) =>
       state.answers[i] ? state.answers[i].toString() : null
     )
-
+    document.getElementById("cardHeader").innerHTML = "<h4> Thank you 🙏</h4>";
+    document.getElementById("cardHeader").style.textAlign = "center";
+    document.getElementById("cardHeader").style.display = "block";
+    document.getElementById("cardContent").innerText = "";
     onFinish(answers)
   }
 
@@ -89,18 +93,31 @@ export const Survey = ({ questions, onFinish }) => {
   return (
     <Card>
       <CardHeader
-        title={<Typography>{state.questions[state.currentQuestionIndex].text}</Typography>}
+        id ="cardHeader"
+        title={
+          <Typography>
+            {state.questions[state.currentQuestionIndex].text}
+          </Typography>
+        }
         subheaderTypographyProps={{
           fontFamily: 'Acme'
         }}
-        subheader={showReqError ?<Typography sx={{fontSize: '10px', color:'red'}}>*This question is required</Typography>: null}
+        subheader={
+          showReqError ? (
+            <Typography sx={{ fontSize: '10px', color: 'red' }}>
+              *This question is required
+            </Typography>
+          ) : null
+        }
         action={
           !hideAction && (
-            <IconButton onClick={() => {
-              state.questions[state.currentQuestionIndex].required ? setShowReqError(true):  
-              dispatch({ type: 'next' })
-              
-              }}>
+            <IconButton
+              onClick={() => {
+                state.questions[state.currentQuestionIndex].required
+                  ? setShowReqError(true)
+                  : dispatch({ type: 'next' })
+              }}
+            >
               <Icon icon='bx:right-arrow-circle' width='32' height='32' />
             </IconButton>
           )
@@ -113,7 +130,8 @@ export const Survey = ({ questions, onFinish }) => {
         }}
       />
 
-      <CardContent>
+      <CardContent
+      id ="cardContent">
         <div>
           <Grow
             key={state.currentQuestionIndex}
