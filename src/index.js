@@ -86,7 +86,8 @@ export const Survezy = ({
       <Slide
         in={slideIn}
         key={demoSurvey ?? survey}
-        timeout={1500}
+        // timeout={1500}
+        timeout={{ appear: 1000, enter: 1000, exit: 5000}}
         direction='up'
         sx={{ position: 'fixed', ...sx }}
       >
