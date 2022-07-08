@@ -113,7 +113,7 @@ export const Survey = ({ questions, onFinish }) => {
           !hideAction && (
             <IconButton
               onClick={() => {
-                {console.log(state.answers[state.currentQuestionIndex])}
+                // {console.log(state.answers[state.currentQuestionIndex])}
                 state.questions[state.currentQuestionIndex].required & typeof(state.answers[state.currentQuestionIndex]) === "undefined"
                   ? setShowReqError(true)
                   : dispatch({ type: 'next' })
