@@ -82,11 +82,12 @@ export const Survey = ({ questions, onFinish }) => {
     document.getElementById("cardHeader").innerHTML = "<h2> Thank you 😊</h2>";
     document.getElementById("cardHeader").style.textAlign = "center";
     document.getElementById("cardHeader").style.display = "block";
-    document.getElementById("cardContent").style.height = "30px";
-    document.getElementById("cardContent").style.textAlign = "center";
-
-    document.getElementById("cardContent").innerText = "Thank you for your valuable response.";
-    onFinish(answers)
+    document.getElementById("cardContent").style.height = "50px";
+    document.getElementById("cardContent").innerHTML = "Thank you for your valuable response.";
+    document.getElementById("cardContent").style.display = "flex";
+    document.getElementById("cardContent").style.justifyContent = "center";
+    document.getElementById("cardContent").style.alignItems = "center";
+    // onFinish(answers)
   }
 
   const hideAction =
