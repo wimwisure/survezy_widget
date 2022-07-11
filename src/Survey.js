@@ -86,7 +86,7 @@ export const Survey = ({ questions, onFinish }) => {
     document.getElementById("cardContent").style.textAlign = "center";
 
     document.getElementById("cardContent").innerText = "Thank you for your valuable response.";
-    // onFinish(answers)
+    onFinish(answers)
   }
 
   const hideAction =
