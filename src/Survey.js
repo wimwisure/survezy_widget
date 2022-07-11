@@ -79,11 +79,14 @@ export const Survey = ({ questions, onFinish }) => {
     const answers = state.questions.map((_, i) =>
       state.answers[i] ? state.answers[i].toString() : null
     )
-    document.getElementById("cardHeader").innerHTML = "<h4> Thank you 🙏</h4>";
+    document.getElementById("cardHeader").innerHTML = "<h2> Thank you 😊</h2>";
     document.getElementById("cardHeader").style.textAlign = "center";
     document.getElementById("cardHeader").style.display = "block";
-    document.getElementById("cardContent").innerText = "";
-    onFinish(answers)
+    document.getElementById("cardContent").style.height = "30px";
+    document.getElementById("cardContent").style.textAlign = "center";
+
+    document.getElementById("cardContent").innerText = "Thank you for your valuable response.";
+    // onFinish(answers)
   }
 
   const hideAction =
