@@ -208,16 +208,30 @@ const IOSSlider = styled(Slider)(({ theme }) => ({
 
 const ScaleOptions = ({ setAnswer }) => {
   const [value, setValue] = useState(0)
-
+  const marks = [
+    {
+      value: 1,
+      label: '1',
+    },
+    {
+      value: 5,
+      label: '5',
+    },
+    {
+      value: 10,
+      label: '10',
+    },
+    // {
+    //   value: 100,
+    //   label: '100°C',
+    // },
+  ];
   return (
     <IOSSlider
       value={value}
       min={1}
       max={10}
-      marks={[2, 3, 5].map((option) => ({
-        value: option,
-        label: ''
-      }))}
+      marks={marks}
       onChange={(e, newValue) => newValue && setValue(newValue)}
       valueLabelDisplay='auto'
       onChangeCommitted={() => setAnswer(value.toString())}
