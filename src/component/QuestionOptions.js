@@ -210,26 +210,52 @@ const ScaleOptions = ({ setAnswer }) => {
   const [value, setValue] = useState(0)
   const marks = [
     {
-      value: 0,
+      value: 1,
       label: '1',
+    },
+    {
+      value: 2,
+      label: '2',
+    },
+    {
+      value: 3,
+      label: '3',
+    },
+    {
+      value: 4,
+      label: '4',
     },
     {
       value: 5,
       label: '5',
     },
     {
+      value: 6,
+      label: '6',
+    },
+    {
+      value: 7,
+      label: '7',
+    },
+    {
+      value: 8,
+      label: '8',
+    },
+    {
+      value: 9,
+      label: '9',
+    },
+
+    {
       value: 10,
       label: '10',
     },
-    // {
-    //   value: 100,
-    //   label: '100°C',
-    // },
+   
   ];
   return (
     <IOSSlider
       value={value}
-      min={0}
+      min={1}
       max={10}
       marks={marks}
       onChange={(e, newValue) => newValue && setValue(newValue)}

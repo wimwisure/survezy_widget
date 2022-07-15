@@ -4,10 +4,13 @@ import {
   CardContent,
   CardHeader,
   Grow,
-  IconButton,
-  Typography
+  Typography,
+  Collapse
 } from '@mui/material'
+
 import React, { useEffect, useReducer } from 'react'
+import { styled } from '@mui/material/styles'
+import IconButton from '@mui/material/IconButton'
 import { Icon } from '@iconify/react'
 import { PoweredBy } from './component/PoweredBy'
 import { QuestionOptions } from './component/QuestionOptions'
@@ -57,9 +60,24 @@ const surveyReducer = (state, { type, payload }) => {
   return state
 }
 
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props
+  return <IconButton {...other} sx={{float: 'right'}}/>
+})(({ theme, expand }) => ({
+  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+  marginLeft: 'auto',
+  transition: theme.transitions.create('transform', {
+    duration: theme.transitions.duration.shortest
+  })
+}))
 export const Survey = ({ questions, onFinish }) => {
   const [showReqError, setShowReqError] = React.useState(false)
-  const welcomeGreeting = "<h4 > Thank you 🙏</h4>";
+  const [expanded, setExpanded] = React.useState(true)
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded)
+  }
+  const welcomeGreeting = '<h4 > Thank you 🙏</h4>'
   const [state, dispatch] = useReducer(surveyReducer, {
     questions,
     answers: [],
@@ -79,14 +97,15 @@ export const Survey = ({ questions, onFinish }) => {
     const answers = state.questions.map((_, i) =>
       state.answers[i] ? state.answers[i].toString() : null
     )
-    document.getElementById("cardHeader").innerHTML = "<h2> Thank you 😊</h2>";
-    document.getElementById("cardHeader").style.textAlign = "center";
-    document.getElementById("cardHeader").style.display = "block";
-    document.getElementById("cardContent").style.height = "60px";
-    document.getElementById("cardContent").innerHTML = "Thank you for your valuable response.";
-    document.getElementById("cardContent").style.display = "flex";
-    document.getElementById("cardContent").style.justifyContent = "center";
-    document.getElementById("cardContent").style.alignItems = "center";
+    document.getElementById('cardHeader').innerHTML = '<h2> Thank you 😊</h2>'
+    document.getElementById('cardHeader').style.textAlign = 'center'
+    document.getElementById('cardHeader').style.display = 'block'
+    document.getElementById('cardContent').style.height = '60px'
+    document.getElementById('cardContent').innerHTML =
+      'Thank you for your valuable response.'
+    document.getElementById('cardContent').style.display = 'flex'
+    document.getElementById('cardContent').style.justifyContent = 'center'
+    document.getElementById('cardContent').style.alignItems = 'center'
     onFinish(answers)
   }
 
@@ -95,81 +114,94 @@ export const Survey = ({ questions, onFinish }) => {
     !notAutoNext.includes(state.questions[state.currentQuestionIndex].type)
 
   return (
-    <Card>
-      <CardHeader
-        id ="cardHeader"
-        title={
-          <Typography>
-            {state.questions[state.currentQuestionIndex].text}
-          </Typography>
-        }
-        subheaderTypographyProps={{
-          fontFamily: 'Acme'
-        }}
-        subheader={
-          showReqError ? (
-            <Typography sx={{ fontSize: '10px', color: 'red' }}>
-              *This question is required
+    <Card sx={{ position: 'relative' }}>
+      <ExpandMore
+        expand={expanded}
+        onClick={handleExpandClick}
+        aria-expanded={expanded}
+        aria-label='show more'
+      >
+        <Icon icon={'bxs:down-arrow'} width='15' height='15' />
+      </ExpandMore>
+      <Collapse in={expanded} timeout='auto' unmountOnExit>
+        <CardHeader
+          id='cardHeader'
+          title={
+            <Typography>
+              {state.questions[state.currentQuestionIndex].text}
             </Typography>
-          ) : null
-        }
-        action={
-          !hideAction && (
-            <IconButton
-              onClick={() => {
-                // {console.log(state.answers[state.currentQuestionIndex])}
-                state.questions[state.currentQuestionIndex].required & typeof(state.answers[state.currentQuestionIndex]) === "undefined"
-                  ? setShowReqError(true)
-                  : dispatch({ type: 'next' })
-              }}
-            >
-              <Icon icon='bx:right-arrow-circle' width='32' height='32' />
-            </IconButton>
-          )
-        }
-        sx={{
-          backgroundColor: (theme) =>
-            theme.palette.mode === 'light'
-              ? theme.palette.grey[200]
-              : theme.palette.grey[700]
-        }}
-      />
-
-      <CardContent
-      id ="cardContent">
-        <div>
-          <Grow
-            key={state.currentQuestionIndex}
-            in
-            style={{ transformOrigin: '0 0 0' }}
-            timeout={700}
-          >
-            <div>
-              <QuestionOptions
-                questionType={state.questions[state.currentQuestionIndex].type}
-                options={state.questions[state.currentQuestionIndex].options}
-                answer={state.answers[state.currentQuestionIndex]}
-                setAnswer={(answer) => {
-                  setShowReqError(false)
-                  dispatch({
-                    type: 'answer',
-                    payload: {
-                      questionIndex: state.currentQuestionIndex,
-                      answer,
-                      questionType:
-                        state.questions[state.currentQuestionIndex].type
-                    }
-                  })
+          }
+          subheaderTypographyProps={{
+            fontFamily: 'Acme'
+          }}
+          subheader={
+            showReqError ? (
+              <Typography sx={{ fontSize: '10px', color: 'red' }}>
+                *This question is required
+              </Typography>
+            ) : null
+          }
+          action={
+            !hideAction && (
+              <IconButton
+                onClick={() => {
+                  // {console.log(state.answers[state.currentQuestionIndex])}
+                  state.questions[state.currentQuestionIndex].required &
+                  (typeof state.answers[state.currentQuestionIndex] ===
+                    'undefined')
+                    ? setShowReqError(true)
+                    : dispatch({ type: 'next' })
                 }}
-              />
-            </div>
-          </Grow>
-        </div>
-      </CardContent>
+              >
+                <Icon icon='bx:right-arrow-circle' width='32' height='32' />
+              </IconButton>
+            )
+          }
+          sx={{
+            backgroundColor: (theme) =>
+              theme.palette.mode === 'light'
+                ? theme.palette.grey[200]
+                : theme.palette.grey[700]
+          }}
+        />
 
-      <CardActions sx={{ justifyContent: 'center' }}>
-        <PoweredBy />
-      </CardActions>
+        <CardContent id='cardContent'>
+          <div>
+            <Grow
+              key={state.currentQuestionIndex}
+              in
+              style={{ transformOrigin: '0 0 0' }}
+              timeout={700}
+            >
+              <div>
+                <QuestionOptions
+                  questionType={
+                    state.questions[state.currentQuestionIndex].type
+                  }
+                  options={state.questions[state.currentQuestionIndex].options}
+                  answer={state.answers[state.currentQuestionIndex]}
+                  setAnswer={(answer) => {
+                    setShowReqError(false)
+                    dispatch({
+                      type: 'answer',
+                      payload: {
+                        questionIndex: state.currentQuestionIndex,
+                        answer,
+                        questionType:
+                          state.questions[state.currentQuestionIndex].type
+                      }
+                    })
+                  }}
+                />
+              </div>
+            </Grow>
+          </div>
+        </CardContent>
+
+        <CardActions sx={{ justifyContent: 'center' }}>
+          <PoweredBy />
+        </CardActions>
+      </Collapse>
     </Card>
   )
 }

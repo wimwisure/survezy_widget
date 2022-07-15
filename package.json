@@ -1,6 +1,6 @@
 {
   "name": "survezy_widget",
-  "version": "1.0.45",
+  "version": "1.0.46",
   "description": "Customizable widget for survezy's surveys.",
   "author": "wimwisure",
   "license": "MIT",
@@ -69,6 +69,7 @@
   "dependencies": {
     "@emotion/react": "^11.8.1",
     "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.4.3",
     "axios": "^0.26.0"
   }
