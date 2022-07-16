@@ -121,7 +121,7 @@ export const Survey = ({ questions, onFinish }) => {
         aria-expanded={expanded}
         aria-label='show more'
       >
-        <Icon icon={'bxs:down-arrow'} width='15' height='15' />
+        <Icon icon={'bxs:up-arrow'} width='15' height='15' />
       </ExpandMore>
       <Collapse in={expanded} timeout='auto' unmountOnExit>
         <CardHeader
