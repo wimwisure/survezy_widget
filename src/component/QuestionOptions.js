@@ -123,7 +123,7 @@ const ShortAnswerOptions = ({ answer, setAnswer }) => {
     <OutlinedInput
       size='small'
       fullWidth
-      placeholder='Answer'
+      placeholder='Please type your response'
       maxRows={1}
       value={answer ?? ''}
       onChange={(e) => setAnswer(e.target.value)}
@@ -140,7 +140,7 @@ const ParagraphOptions = ({ answer, setAnswer }) => {
     <OutlinedInput
       size='small'
       fullWidth
-      placeholder='Answer'
+      placeholder='Please type your response'
       multiline
       rows={3}
       value={answer ?? ''}
